@@ -11,4 +11,30 @@ class RegistrationForm(FlaskForm):
   confirm_password = PasswordField('Confirm_password',validators=[DataRequired(),EqualTo('Password',message="Password must match.")])
   submit = SubmitField('Register')
 
+class LoginFrom(FlaskForm):
+  email_or_phone = StringField('Email or Phone',validators=[DataRequired()])
+  password = PasswordField('Password',validators=[DataRequired()])
+  submit = SubmitField('Login')
+
+def validators(self):
+  if not super(LoginFrom, self).validators():
+    return False
+
+  data = self.email_or_phone.data
+  if not (self._is_email(data) or self._is_phone(data)):
+    msg = 'Please enter a valid email or phone number.'
+    self.email_or_phone.errors.append(msg)
+    return False
+
+  return True
+
+@staticmethod
+def _is_email(data):
+  try:
+     validator.Email()(None, None, data)
+     return True
+  except ValidationError:
+    return False
   
+
+
