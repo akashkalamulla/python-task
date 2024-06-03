@@ -11,13 +11,13 @@ class RegistrationForm(FlaskForm):
   confirm_password = PasswordField('Confirm_password',validators=[DataRequired(),EqualTo('Password',message="Password must match.")])
   submit = SubmitField('Register')
 
-class LoginFrom(FlaskForm):
+class LoginForm(FlaskForm):
   email_or_phone = StringField('Email or Phone',validators=[DataRequired()])
   password = PasswordField('Password',validators=[DataRequired()])
   submit = SubmitField('Login')
 
 def validators(self):
-  if not super(LoginFrom, self).validators():
+  if not super(LoginForm, self).validators():
     return False
 
   data = self.email_or_phone.data
