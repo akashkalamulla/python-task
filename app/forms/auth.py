@@ -28,13 +28,6 @@ def validators(self):
 
   return True
 
-@staticmethod
-def _is_email(data):
-  try:
-     validator.Email()(None, None, data)
-     return True
-  except ValidationError:
-    return False
   
 
 
